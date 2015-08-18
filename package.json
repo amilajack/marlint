@@ -1,0 +1,63 @@
+{
+  "name": "marlint",
+  "version": "1.1.0",
+  "description": "Simple Linter for Traveloka JS styleguide (based on xo)",
+  "license": "MIT",
+  "repository": "traveloka/marlint",
+  "author": {
+    "name": "Fatih Kalifa",
+    "email": "fatih@traveloka.com",
+    "url": "traveloka.com"
+  },
+  "bin": "cli.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "node test.js"
+  },
+  "files": [
+    "index.js",
+    "cli.js",
+    "rc"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli",
+    "marlint",
+    "code",
+    "quality",
+    "style",
+    "lint",
+    "linter",
+    "jscs",
+    "jshint",
+    "jslint",
+    "eslint",
+    "validate",
+    "code style",
+    "standard",
+    "strict",
+    "check",
+    "checker",
+    "verify",
+    "enforce",
+    "hint",
+    "simple"
+  ],
+  "dependencies": {
+    "arrify": "^1.0.0",
+    "eslint": "^1.1.0",
+    "eslint-config-marlint": "^1.0.0",
+    "get-stdin": "^4.0.1",
+    "globby": "^2.1.0",
+    "look-up": "^0.7.1",
+    "meow": "^3.3.0",
+    "object-assign": "^3.0.0",
+    "update-notifier": "^0.5.0",
+    "babel-eslint": "^4.0.5"
+  },
+  "devDependencies": {
+    "ava": "0.0.4"
+  }
+}
