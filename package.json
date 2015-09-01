@@ -48,7 +48,7 @@
   "dependencies": {
     "arrify": "^1.0.0",
     "eslint": "^1.1.0",
-    "eslint-config-marlint": "^1.0.0",
+    "eslint-config-marlint": "^1.0.1",
     "get-stdin": "^4.0.1",
     "globby": "^2.1.0",
     "look-up": "^0.7.1",
