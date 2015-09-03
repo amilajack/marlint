@@ -47,15 +47,15 @@
   ],
   "dependencies": {
     "arrify": "^1.0.0",
+    "babel-eslint": "^4.1.1",
     "eslint": "^1.1.0",
-    "eslint-config-marlint": "^1.0.1",
+    "eslint-config-marlint": "^1.1.0",
     "get-stdin": "^4.0.1",
     "globby": "^2.1.0",
     "look-up": "^0.7.1",
     "meow": "^3.3.0",
     "object-assign": "^3.0.0",
-    "update-notifier": "^0.5.0",
-    "babel-eslint": "^4.0.5"
+    "update-notifier": "^0.5.0"
   },
   "devDependencies": {
     "ava": "0.0.4"
