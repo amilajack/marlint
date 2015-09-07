@@ -1,19 +1,16 @@
 # Marlint [![Build Status](https://travis-ci.org/traveloka/marlint.svg?branch=master)](https://travis-ci.org/traveloka/marlint)
 
-> Simple Linter for Traveloka JS styleguide (based on [XO](https://github.com/sindresorhus/xo))
+> JavaScript strict code style with ES6+ES7, React, and Flowtype (based on [XO](https://github.com/sindresorhus/xo))
 
 Enforce strict code style. Never discuss code style on a code review again
 
 No decision-making. No `.eslintrc`, `.jshintrc`, `.jscsrc` to manage. It just works!
 
-Uses [babel-eslint](https://github.com/babel/babel-eslint) underneath.
-
 ## Basic feature
 
-- ES6 support by default
-- Flowtype compatible
-- React (and JSX) support
-
+- ES6+ES7 support
+- Flowtype compatible (will not throw error on flow annotation)
+- React (and JSX) support (with sane rules, like no implicit React dependency on JS file with JSX syntax)
 
 ## Code style
 
@@ -92,7 +89,7 @@ Simply run `$ marlint --init` to add Marlint to your `package.json`:
 	},
 	"devDependencies": {
 		"mocha": "^2.0.0",
-		"marlint": "^0.1.0"
+		"marlint": "^1.3.0"
 	}
 }
 ```
@@ -143,7 +140,7 @@ Please take a moment to consider if you really need to use this option.
 
 #### Why not ESLint / Standard / XO?
 
-This project aims to simplify code convention across Traveloka javascripts code by just typing `marlint` and be done. No decision-making. No config. Standard is way too opinionated and the rules is not meant to be changed. We could use XO as it's the closest candidate in styleguide rule, but with slight modification, like adding support for ES6, Flowtype, and React. Unfortunately we need to create another config file and custom rule for every single JavaScript project. This tool is created to solve that problem.
+This project aims to simplify code convention across Traveloka javascripts code by just typing `marlint` and be done. No decision-making, no config. Standard is way too opinionated and the rules is not meant to be changed. We could use XO, but we have to add support for ES6+ES7, React and Flowtype everytime we add new JavaScript project and that means duplicate config file. This tool is created to solve that problem.
 
 ## Editors
 
