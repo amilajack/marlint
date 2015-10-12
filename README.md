@@ -41,7 +41,6 @@ $ marlint --help
     $ marlint [<file|glob> ...]
 
   Options
-    --init     Add Marlint to your project
     --compact  Compact output
     --stdin    Validate code from stdin
     --env      Environment preset  [Can be set multiple times]
@@ -56,42 +55,6 @@ $ marlint --help
 
   Tips
     Put options in package.json instead of using flags so other tools can read it.
-```
-
-
-## Workflow
-
-The recommended workflow is to add Marlint locally to your project and run it with the tests.
-
-Simply run `$ marlint --init` to add Marlint to your `package.json`:
-
-### Before
-
-```json
-{
-	"name": "your-project",
-	"scripts": {
-		"test": "mocha"
-	},
-	"devDependencies": {
-		"mocha": "^2.0.0"
-	}
-}
-```
-
-### After
-
-```json
-{
-	"name": "your-project",
-	"scripts": {
-		"test": "marlint && mocha"
-	},
-	"devDependencies": {
-		"mocha": "^2.0.0",
-		"marlint": "^1.3.0"
-	}
-}
 ```
 
 ## Config
@@ -144,7 +107,7 @@ This project aims to simplify code convention across Traveloka javascripts code 
 
 ## Editors
 
-Coming Soon
+- [Atom Linter Marlint](https://github.com/traveloka/atom-linter-marlint)
 
 ## Related
 

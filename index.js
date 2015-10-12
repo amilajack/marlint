@@ -1,108 +1,89 @@
+/* eslint prefer-arrow-callback: 0 */
 'use strict';
 var path = require('path');
 var eslint = require('eslint');
 var globby = require('globby');
-var lookUp = require('look-up');
 var objectAssign = require('object-assign');
 var arrify = require('arrify');
-
-var DEFAULT_PATTERNS = [
-	'**/*.js',
-	'**/*.jsx'
-];
+var pkgConf = require('pkg-conf');
+var deepAssign = require('deep-assign');
 
 var DEFAULT_IGNORE = [
-	'node_modules/**',
-	'bower_components/**',
-	'coverage/**',
-	'tmp/**',
-	'temp/**',
-	'**/*.min.js',
-	'**/bundle.js'
+  'node_modules/**',
+  'bower_components/**',
+  'coverage/**',
+  '{tmp,temp}/**',
+  '**/*.min.js',
+  '**/bundle.js',
+  'fixture.js',
+  '{test/,}fixture{s,}/**'
 ];
 
 var DEFAULT_CONFIG = {
-	useEslintrc: false,
-	configFile: path.join(__dirname, 'rc', '.eslintrc')
+  useEslintrc: false,
+  baseConfig: {
+    extends: 'marlint'
+  }
 };
 
 function handleOpts(opts) {
-	opts = objectAssign({
-		cwd: process.cwd()
-	}, opts);
+  opts = objectAssign({
+    cwd: process.cwd()
+  }, opts);
 
-	var pkgOpts = {};
+  opts = objectAssign({}, pkgConf.sync('marlint', opts.cwd), opts);
 
-	try {
-		pkgOpts = require(lookUp('package.json', {cwd: opts.cwd})).marlint;
-	} catch (err) {}
+  // alias to help humans
+  opts.envs = opts.envs || opts.env;
+  opts.globals = opts.globals || opts.global;
+  opts.ignores = opts.ignores || opts.ignore;
+  opts.rules = opts.rules || opts.rule;
 
-	opts = objectAssign({}, pkgOpts, opts);
+  opts.ignores = DEFAULT_IGNORE.concat(opts.ignores || []);
 
-	// alias to help humans
-	opts.envs = opts.envs || opts.env;
-	opts.globals = opts.globals || opts.global;
-	opts.ignores = opts.ignores || opts.ignore;
-	opts.rules = opts.rules || opts.rule;
+  opts._config = deepAssign({}, DEFAULT_CONFIG, {
+    envs: arrify(opts.envs),
+    globals: arrify(opts.globals),
+    rules: opts.rules
+  });
 
-	opts.ignores = DEFAULT_IGNORE.concat(opts.ignores || []);
+  if (!opts._config.rules) {
+    opts._config.rules = {};
+  }
 
-	opts._config = objectAssign({}, DEFAULT_CONFIG, {
-		envs: arrify(opts.envs),
-		globals: arrify(opts.globals),
-		rules: opts.rules
-	});
+  if (opts.es5) {
+    opts._config.baseConfig = 'marlint/es5';
+  }
 
-	return opts;
+  return opts;
 }
 
 exports.lintText = function (str, opts) {
-	opts = handleOpts(opts);
+  opts = handleOpts(opts);
 
-	var engine = new eslint.CLIEngine(opts._config);
-	var ret = engine.executeOnText(str);
+  var engine = new eslint.CLIEngine(opts._config);
 
-	return ret;
+  return engine.executeOnText(str, opts.filename);
 };
 
-exports.lintFiles = function (patterns, opts, cb) {
-	if (typeof opts !== 'object') {
-		cb = opts;
-		opts = {};
-	}
+exports.lintFiles = function (patterns, opts) {
+  opts = handleOpts(opts);
 
-	opts = handleOpts(opts);
+  if (patterns.length === 0) {
+    patterns = '**/*.{js,jsx}';
+  }
 
-	if (patterns.length === 0) {
-		patterns = DEFAULT_PATTERNS;
-	}
+  return globby(patterns, { ignore: opts.ignores }).then(function (paths) {
+    // when users are silly and don't specify an extension in the glob pattern
+    paths = paths.filter(function (x) {
+      var ext = path.extname(x);
+      return ext === '.js' || ext === '.jsx';
+    });
 
-	globby(patterns, {ignore: opts.ignores}, function (err, paths) {
-		if (err) {
-			cb(err);
-			return;
-		}
+    var engine = new eslint.CLIEngine(opts._config);
 
-		// when users are silly and don't specify an extension in the glob pattern
-		paths = paths.filter(function (x) {
-			var ext = path.extname(x);
-			return ext === '.js' || ext === '.jsx';
-		});
-
-		var ret;
-		var engine = new eslint.CLIEngine(opts._config);
-
-		try {
-			ret = engine.executeOnFiles(paths);
-		} catch (err) {
-			cb(err);
-			return;
-		}
-
-		ret._getFormatter = engine.getFormatter;
-
-		cb(null, ret);
-	});
+    return engine.executeOnFiles(paths);
+  });
 };
 
 exports.getFormatter = eslint.CLIEngine.getFormatter;
