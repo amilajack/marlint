@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint no-var:0 */
 /* eslint prefer-arrow-callback:0 */
 'use strict';
 var updateNotifier = require('update-notifier');

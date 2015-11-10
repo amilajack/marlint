@@ -1,4 +1,5 @@
 /* eslint prefer-arrow-callback: 0 */
+/* eslint no-var:0 */
 'use strict';
 var path = require('path');
 var eslint = require('eslint');
