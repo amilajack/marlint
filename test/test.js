@@ -8,8 +8,6 @@ test('.lintText()', t => {
   const file = fs.readFileSync(fixture, { encoding: 'utf-8' });
   const errors = marlint.lintText(file).results;
   t.is(errors[0].messages[0].ruleId, 'no-unused-vars');
-
-  t.end();
 });
 
 test('.lintText() - es5', t => {
@@ -17,6 +15,4 @@ test('.lintText() - es5', t => {
   const file = fs.readFileSync(fixture, { encoding: 'utf-8' });
   const errors = marlint.lintText(file, { es5: true }).results;
   t.is(errors[0].messages[0].ruleId, 'one-var');
-
-  t.end();
 });
