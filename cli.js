@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-/* eslint no-var:0 */
-/* eslint prefer-arrow-callback:0 */
 'use strict';
 var updateNotifier = require('update-notifier');
 var getStdin = require('get-stdin');
@@ -19,6 +17,7 @@ var cli = meow({
     '  --env           Environment preset  [Can be set multiple times]',
     '  --global        Global variable  [Can be set multiple times]',
     '  --ignore        Additional paths to ignore  [Can be set multiple times]',
+    '  --quiet         Disable warning errors',
     '  --fix           Automagically fixes code',
     '',
     'Examples',

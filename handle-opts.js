@@ -39,7 +39,8 @@ module.exports = function handleOpts(opts) {
   opts._config = deepAssign({}, DEFAULT_CONFIG, {
     envs: arrify(opts.envs),
     globals: arrify(opts.globals),
-    rules: opts.rules
+    rules: opts.rules,
+    quiet: opts.quiet
   });
 
   if (!opts._config.rules) {
