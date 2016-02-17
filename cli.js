@@ -19,6 +19,7 @@ var cli = meow({
     '  --env           Environment preset  [Can be set multiple times]',
     '  --global        Global variable  [Can be set multiple times]',
     '  --ignore        Additional paths to ignore  [Can be set multiple times]',
+    '  --fix           Automagically fixes code',
     '',
     'Examples',
     '  $ marlint',
@@ -45,13 +46,12 @@ updateNotifier({ pkg: cli.pkg }).notify();
 var input = cli.input;
 var opts = cli.flags;
 
-function error(err) {
-  console.error(err.stack);
-  process.exit(1);
-}
-
 function log(report) {
-  process.stdout.write(marlint.getFormatter(opts.compact && 'compact')(report.results));
+  if (opts.compact) {
+    opts.reporter = 'compact';
+  }
+
+  process.stdout.write(marlint.getFormatter(opts.reporter)(report.results));
   process.exit(report.errorCount === 0 ? 0 : 1);
 }
 
@@ -66,5 +66,11 @@ if (opts.stdin) {
     log(marlint.lintText(str, opts));
   });
 } else {
-  marlint.lintFiles(input, opts).then(log).catch(error);
+  marlint.lintFiles(input, opts).then(report => {
+    if (opts.fix) {
+      marlint.outputFixes(report);
+    }
+
+    log(report);
+  });
 }

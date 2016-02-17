@@ -34,3 +34,4 @@ exports.lintFiles = function (patterns, opts) {
 
 exports.getFormatter = eslint.CLIEngine.getFormatter;
 exports.getErrorResults = eslint.CLIEngine.getErrorResults;
+exports.outputFixes = eslint.CLIEngine.outputFixes;
