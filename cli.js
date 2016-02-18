@@ -87,12 +87,12 @@ if (opts.stdin) {
   });
 } else {
   marlint.lintFiles(input, opts).then(report => {
-    if (opts.quiet) {
-      report.results = surpressWarning(report.results);
-    }
-
     if (opts.fix) {
       marlint.outputFixes(report);
+    }
+
+    if (opts.quiet) {
+      report.results = surpressWarning(report.results);
     }
 
     log(report);

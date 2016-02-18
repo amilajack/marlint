@@ -40,7 +40,8 @@ module.exports = function handleOpts(opts) {
     envs: arrify(opts.envs),
     globals: arrify(opts.globals),
     rules: opts.rules,
-    quiet: opts.quiet
+    quiet: opts.quiet,
+    fix: opts.fix
   });
 
   if (!opts._config.rules) {
