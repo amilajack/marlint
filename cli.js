@@ -60,12 +60,37 @@ if (input[0] === '-') {
   input.shift();
 }
 
+function isErrorMessage(message) {
+  return message.severity === 2;
+}
+
+function surpressWarning(results) {
+  var filtered = [];
+
+  results.forEach(function (result) {
+    var filteredMessages = result.messages.filter(isErrorMessage);
+
+    if (filteredMessages.length > 0) {
+      filtered.push({
+        filePath: result.filePath,
+        messages: filteredMessages
+      });
+    }
+  });
+
+  return filtered;
+}
+
 if (opts.stdin) {
   getStdin().then(function (str) {
     log(marlint.lintText(str, opts));
   });
 } else {
   marlint.lintFiles(input, opts).then(report => {
+    if (opts.quiet) {
+      report.results = surpressWarning(report.results);
+    }
+
     if (opts.fix) {
       marlint.outputFixes(report);
     }
