@@ -43,18 +43,18 @@
   ],
   "dependencies": {
     "arrify": "^1.0.0",
-    "babel-eslint": "^5.0.0",
+    "babel-eslint": "^6.0.0",
     "deep-assign": "^2.0.0",
-    "eslint": "2.2.0",
-    "eslint-config-marlint": "^1.5.0",
+    "eslint": "^2.5.3",
+    "eslint-config-marlint": "^2.0.1",
     "eslint-plugin-babel": "^3.1.0",
-    "eslint-plugin-react": "^3.16.1",
+    "eslint-plugin-react": "^4.2.3",
     "get-stdin": "^5.0.0",
     "globby": "^4.0.0",
     "meow": "^3.5.0",
     "object-assign": "^4.0.1",
-    "pkg-conf": "^1.1.1",
-    "update-notifier": "^0.6.0"
+    "pkg-conf": "^1.1.2",
+    "update-notifier": "^0.6.3"
   },
   "devDependencies": {
     "ava": "^0.11.0"
