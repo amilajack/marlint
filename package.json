@@ -46,7 +46,7 @@
     "babel-eslint": "^6.0.0",
     "deep-assign": "^2.0.0",
     "eslint": "^2.5.3",
-    "eslint-config-marlint": "^2.0.1",
+    "eslint-config-marlint": "^2.0.2",
     "eslint-plugin-babel": "^3.1.0",
     "eslint-plugin-react": "^4.2.3",
     "get-stdin": "^5.0.0",
