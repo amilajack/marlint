@@ -1,6 +1,6 @@
 {
   "name": "marlint",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Javascript code linter for traveloka js styleguide",
   "license": "MIT",
   "repository": "traveloka/marlint",
