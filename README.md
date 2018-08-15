@@ -1,4 +1,4 @@
-# Marlint [![Build Status](https://travis-ci.org/traveloka/marlint.svg?branch=master)](https://travis-ci.org/traveloka/marlint)
+# Marlint [![Build Status](https://travis-ci.org/traveloka/marlint.svg?branch=master)](https://travis-ci.org/traveloka/marlint) [![Greenkeeper badge](https://badges.greenkeeper.io/amilajack/marlint.svg)](https://greenkeeper.io/)
 
 > JavaScript strict code style with ES6+ES7, React, and Flowtype (based on [XO](https://github.com/sindresorhus/xo))
 
